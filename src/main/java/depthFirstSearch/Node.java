@@ -1,30 +1,59 @@
 package depthFirstSearch;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Node<T> {
-    T key;
-    Node left, right;
+    private int value;
+    private boolean visited;
 
-    public Node(T key) {
-        this.key = key;
-        left = right = null;
+    private Node father;
+    private List<Node> connectedNodes = new ArrayList<>();
+
+    private int distanceFromStartPoint=  0;
+
+
+    public int getValue() {
+        return value;
     }
 
-    public void printVertical() {
-        printVerticalHelper(this, 0);
+    public void setValue(int value) {
+        this.value = value;
     }
 
-    private void printVerticalHelper(Node node, int indentation) {
-        if (node == null) {
-            return;
-        }
+    public boolean isVisited() {
+        return visited;
+    }
 
-        printVerticalHelper(node.left, indentation + 1);
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
 
-        for (int i = 0; i < indentation; i++) {
-            System.out.print("  ");
-        }
-        System.out.println(node.key);
+    public Node getFather() {
+        return father;
+    }
 
-        printVerticalHelper(node.right, indentation + 1);
+    public void setFather(Node father) {
+        this.father = father;
+    }
+
+    public List<Node> getConnectedNodes() {
+        return connectedNodes;
+    }
+
+    public void setConnectedNodes(List<Node> connectedNodes) {
+        this.connectedNodes = connectedNodes;
+    }
+
+    public int getDistanceFromStartPoint() {
+        return distanceFromStartPoint;
+    }
+
+    public void setDistanceFromStartPoint(int distanceFromStartPoint) {
+        this.distanceFromStartPoint = distanceFromStartPoint;
+    }
+
+    public void addNodeToConnectedNodes(Node node){
+        connectedNodes.add(node);
     }
 }

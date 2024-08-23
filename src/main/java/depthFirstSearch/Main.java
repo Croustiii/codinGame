@@ -1,12 +1,10 @@
 package depthFirstSearch;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
 
+    // https://www.codingame.com/ide/puzzle/death-first-search-episode-1
     public static void main(String[] args) {
 
         InputReader inputReader = new InputReader(5, 4, 2);
@@ -14,15 +12,15 @@ public class Main {
         inputReader.addRelation("0 1");
         inputReader.addRelation("0 2");
         inputReader.addRelation("1 3");
-        inputReader.displayMatrix();
 
     }
 
-
-
 }
 
-// Classe  responsable de la lecture des inputs et de la construction de la matrice d'adjacence à partir des inputs de l'exercice Coding Game
+
+/***
+ * Classe responsable de la lecture des inputs et de la construction de la matrice d'adjacence à partir des inputs de l'exercice Coding Game
+ */
 class InputReader{
 
     // Nombre de sommets N
@@ -31,6 +29,8 @@ class InputReader{
     public int edgesCount;
     //Nombre de passerelles de sortie E
     public int exitCount;
+
+    private List<Node> listOfNodes = new ArrayList<>();
 
     // hashmap Matrice d'adjacency
     public HashMap<String, HashSet<String>> adjacencyMatrix = new HashMap<>();
@@ -63,35 +63,7 @@ class InputReader{
         }
 
     }
-    public void displayMatrix(){
-        System.out.println(adjacencyMatrix);
-    }
 
-    public Node buildBinaryTree(HashMap<String, String[]> AdjacencyList, Node rootNode){
-        // Create a map to store the nodes
-        HashMap<String, Node> nodes = new HashMap<>();
 
-        // Create a node for each key in the adjacency list
-        for(String key : AdjacencyList.keySet()){
-            nodes.put(key, new Node(key));
-        }
-
-        // Assign children to each node
-        for(Map.Entry<String, String[]> entry : AdjacencyList.entrySet()){
-            Node node = nodes.get(entry.getKey());
-            String[] children = entry.getValue();
-
-            // Assign the left and right children, if they exist
-            if(children.length > 0){
-                node.left = nodes.get(children[0]);
-            }
-            if(children.length > 1){
-                node.right = nodes.get(children[1]);
-            }
-        }
-
-        // Return the root node
-        return nodes.get(rootNode.key);
-    }
 
 }
